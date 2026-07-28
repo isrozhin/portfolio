@@ -1,0 +1,16 @@
+# Local build leftovers — not part of the published site
+exports/
+styles.css
+README.md
+IMAGES.md
+
+# Old redirect stubs (the site is a single index.html now)
+21pub.html
+anyfin-holistic-experience.html
+anyfin-rethinking-refinance.html
+contact.html
+credit-score-tracker.html
+endowment-life-insurance-v2.html
+endowment-life-insurance.html
+intensive-care-monitoring.html
+ux-research.html

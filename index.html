@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ivan Rozhin, Product designer</title>
+  <meta name="description" content="Ivan Rozhin Portfolio">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+/* ---------------------------------------------------------------
+   Ivan Rozhin — portfolio
+   Clean static recreation of isrozhin.framer.website
+--------------------------------------------------------------- */
+
+:root {
+  --bg: #ffffff;
+  --fg: #0a0a0a;
+  --muted: #9a9a9a;
+  --line: #ececec;
+  --radius: 12px;
+  --maxw: 1200px;
+  --textw: 640px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: 0.6; }
+img { max-width: 100%; display: block; }
+
+.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 40px; }
+
+/* --- header --- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+.brand { font-size: 18px; font-weight: 400; line-height: 1.3; }
+.brand span { display: block; color: var(--muted); font-weight: 400; }
+.nav { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-size: 18px; font-weight: 400; line-height: 1.3; }
+
+/* --- home project grid --- */
+.projects {
+  display: grid;
+  grid-template-columns: repeat(2, 320px);
+  justify-content: center;
+  column-gap: 112px;
+  row-gap: 96px;
+  padding: 96px 0 120px;
+}
+.card { display: block; width: 320px; max-width: 100%; }
+.card .thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f2f2f2, #e8e8e8);
+}
+.card .ext-icon {
+  position: absolute; top: 16px; right: 16px;
+  width: 20px; height: 20px; color: #fff;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.25));
+}
+.card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+.card-title {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.25;
+  margin-top: 16px;
+}
+.card-meta { margin-top: 8px; color: var(--muted); font-size: 20px; font-weight: 400; }
+.accent-anyfin { color: #C88B00; }
+.card-meta .dot {
+  display: inline-block; width: 4px; height: 4px;
+  border-radius: 50%; background: currentColor;
+  margin: 0 8px; vertical-align: middle;
+}
+
+/* --- case study --- */
+.case { padding-bottom: 40px; }
+/* sticky "back to cases" button, 24px under the 87px sticky top bar */
+.back-btn {
+  position: sticky; top: 111px; z-index: 40;
+  display: inline-flex; align-items: center; gap: 8px; width: max-content;
+  padding: 8px 16px; margin: 0;
+  font-size: 20px; font-weight: 500; line-height: 1; color: #000;
+  background: rgba(241, 239, 239, 0.5);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  border-radius: 12px;
+}
+.back-btn svg { display: block; flex: none; }
+.back-btn svg, .back-btn span { transition: transform .15s ease; }
+/* hover: keep background, nudge arrow + text 4px to the left */
+.back-btn:hover { opacity: 1; }
+.back-btn:hover svg, .back-btn:hover span { transform: translateX(-4px); }
+/* header: left title + subtitle + intro, then a full-width image container */
+.case-head { max-width: 640px; padding-top: 80px; }
+.case-title { font-size: 48px; line-height: 1.12; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 12px; }
+.case-title .accent { color: #27AE60; }
+.case-title .accent-mimo { color: #05A105; }
+.case-subtitle { font-size: 20px; color: var(--muted); font-weight: 400; margin: 0 0 32px; }
+.case-head p { font-size: 20px; font-weight: 400; margin: 0 0 22px; }
+.case-gallery {
+  width: 100%; height: 592px;
+  border-radius: 24px; overflow: hidden;
+  padding: 0 40px;                 /* images scale down once they reach this padding */
+  display: flex; align-items: center; justify-content: center;
+  margin: 56px 0 120px;
+}
+/* natural composition is 715px wide (200 + 40 + 235 + 40 + 200); it holds that size
+   until the container gets narrower, then the whole row scales down proportionally */
+.g-row {
+  flex: none;
+  width: min(715px, 100%);
+  display: flex; align-items: center; justify-content: center;
+  gap: 5.594%;                     /* 40 / 715 */
+}
+.g-row img { flex: none; height: auto; display: block; border-radius: 14px; }
+.g-side   { width: 27.972%; }   /* 200 / 715 */
+.g-center { width: 32.867%; }   /* 235 / 715 */
+.g-row .ph-slot { border-radius: 14px; background: rgba(0, 0, 0, 0.06); }
+.g-side.ph-slot   { aspect-ratio: 200 / 436; }
+.g-center.ph-slot { aspect-ratio: 235 / 509; }
+/* single header image */
+.g-row-1 { width: min(920px, 100%); }
+/* 592px container - 40px top/bottom margin = 512px max image height */
+.g-single { width: auto; max-width: 100%; height: auto; max-height: 512px; margin: 0 auto; display: block; border-radius: 16px; }
+.g-single.ph-slot { width: 100%; aspect-ratio: 16 / 9; }
+/* fit variant: container hugs a wide image with a 40px top/bottom inner margin */
+.case-gallery.fit { height: auto; padding-top: 40px; padding-bottom: 40px; }
+.case-gallery.fit .g-row-1 { width: 100%; }
+.case-gallery.fit .g-single { width: 100%; max-height: none; border-radius: 16px; }
+/* balance-sheet header art already has rounded corners baked in */
+#mimo-balance-sheet-reconciliation .case-gallery .g-single { border-radius: 0; }
+
+.content { max-width: none; margin: 0; font-size: 20px; }
+.content > :first-child { margin-top: 0; }   /* keep header→content gap exactly 120px */
+.content > h2, .content > h3, .content > p, .content > ul, .content > ol { max-width: var(--textw); }  /* text column; images go wider */
+.content h2 { font-size: 32px; font-weight: 700; letter-spacing: 0; color: #000; margin: 120px 0 40px; }   /* main section: 120px above, 40px below */
+.content h3.sub { font-size: 24px; font-weight: 700; letter-spacing: 0; color: #000; margin: 40px 0 40px; } /* sub-section: 40px above/below */
+.content h3.sub.extra { margin-top: 80px; }   /* 40px base + 40px extra */
+#mimo-design-framework .content h3.sub,
+#mimo-balance-sheet-reconciliation .content h3.sub { margin-bottom: 24px; }   /* 24px under style-2 titles */
+/* keep title -> content gap a consistent 40px regardless of what follows */
+.content > h2 + *, .content > h3 + * { margin-top: 0; }
+.content p { margin: 0 0 22px; font-weight: 400; }
+.content ul, .content ol { margin: 0 0 22px; padding-left: 24px; }
+.content li { margin-bottom: 10px; }
+
+/* side note (aside) */
+.content > .note { max-width: var(--textw); }
+.note { margin: 0 0 22px; padding: 6px 0 6px 20px; border-left: 3px solid #E0E0E0; color: #5a5a5a; font-size: 16px; line-height: 1.6; }
+.note .note-label { display: block; font-weight: 600; color: #0a0a0a; margin-bottom: 4px; }
+
+/* figures / images */
+figure { margin: 48px 0; max-width: var(--textw); }
+
+/* grey image band: full-bleed background (no radius) + captions beneath (page-margin aligned) */
+.shots-group { max-width: none; margin: 48px 0; }
+.shots-box { width: 100vw; margin-left: calc(50% - 50vw); background: #f2f2f2; padding: 48px 40px; }
+.shots-inner { display: flex; justify-content: center; align-items: flex-start; gap: 48px; }
+.shot-col { flex: none; width: 220px; }
+.shot-col img { width: 220px; height: auto; display: block; border-radius: 14px; }
+.shot-col .ph-shot { width: 220px; aspect-ratio: 200 / 440; border-radius: 14px; background: #ffffff; }
+.ph-shot { display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px; }
+.shot-col figcaption { margin-top: 14px; }   /* caption sits inside the grey band */
+/* stacked full-width image(s) inside the grey band */
+.shots-stack { max-width: var(--maxw); margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+.g-stack-item { text-align: center; }
+.g-stack-item img { width: 100%; height: auto; display: block; margin: 0 auto; border-radius: 16px; }
+.g-stack-item .ph-wide { width: 100%; aspect-ratio: 16 / 9; margin: 0 auto; border-radius: 16px; background: #ffffff; }
+.ph-wide { display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px; }
+.g-stack-item figcaption { margin-top: 14px; }
+
+/* row of fixed 320px images (varying heights) + captions; stacks on mobile */
+.cols { max-width: none; display: flex; align-items: flex-start; gap: 32px; margin: 48px 0; }
+/* 320px max, but shrink so three fit in a row; same width applies to the 2-image rows too */
+.col-item { flex: none; width: min(320px, calc((100% - 64px) / 3)); margin: 0; }
+.col-item img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.col-item .ph-col {
+  width: 100%; aspect-ratio: 320 / 560; border-radius: 14px; background: #f2f2f2;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+.col-item figcaption { margin-top: 14px; }
+
+/* captioned image grid: N per row, stacks on mobile */
+.imgrid { display: grid; gap: 32px; margin: 48px 0; max-width: none; }
+.imgrid.c1 { grid-template-columns: 1fr; }
+.imgrid.c2 { grid-template-columns: 1fr 1fr; }
+.imgrid.c3 { grid-template-columns: 1fr 1fr 1fr; }
+.imgrid.c4 { grid-template-columns: repeat(4, 1fr); }
+.imgrid figure { margin: 0; max-width: none; }
+.imgrid img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.imgrid img.stroke { box-shadow: 0 0 0 1px #DCDCDC; }   /* 1px outside stroke, follows radius */
+.imgrid img.flat { border-radius: 0; }   /* opt-out of rounded corners */
+.imgrid img.graybg { background: #f2f2f2; padding: 24px; }   /* placeholder-grey backing, 24px inner margin */
+.imgrid img.gbox { background: #F5F5F5; padding: 16px; }   /* light-grey backing, 16px inner margin */
+.imgrid .ph-grid {
+  width: 100%; aspect-ratio: 16 / 9; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+.imgrid figcaption { margin-top: 14px; }
+
+/* bullet list with a bold lead line */
+.content p.ul-lead { font-weight: 600; margin: 0 0 8px; }
+/* list with a regular-weight lead line */
+.content p.list-lead { margin: 0 0 8px; }
+
+/* icon + text rows (32px icon, 16px gap, 24px between rows) */
+.iconlist { display: flex; flex-direction: column; gap: 24px; margin: 40px 0; max-width: var(--textw); }
+.ic-row { display: flex; align-items: center; gap: 16px; }
+.ic-img { flex: 0 0 32px; width: 32px; height: 32px; display: block; }
+.ic-ph { flex: 0 0 32px; width: 32px; height: 32px; background: #f2f2f2; border-radius: 8px; }
+
+/* split feature block: text left + image right; image wraps below when it can't fit */
+.split { display: flex; flex-wrap: wrap; gap: 48px; align-items: center; margin: 64px 0; }
+.split-text { flex: 1 1 360px; }
+.split-h { font-size: 24px; font-weight: 700; color: #000; margin: 0 0 16px; }
+.split-text p { margin: 0; }
+.split-media { flex: 0 1 300px; margin: 0; }
+.split-media img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.split-media .ph-split {
+  width: 100%; aspect-ratio: 320 / 640; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+
+/* text column + side image (image width/wrap controlled inline), image wraps below */
+.textimg { display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; margin: 48px 0; }
+.ti-text { flex: 1 1 360px; max-width: var(--textw); }
+.ti-text p { margin: 0 0 22px; }
+.ti-text p:last-child { margin-bottom: 0; }
+.ti-media { margin: 0; }
+.ti-media img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.ti-media .ph-ti {
+  width: 100%; aspect-ratio: 4 / 3; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+
+/* equal-size image grid (all items same size even when wrapped) */
+.imgflow { display: grid; gap: 32px; margin: 48px 0; justify-content: start; }
+.imgflow figure { margin: 0; }
+.imgflow img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.imgflow .ph-flow {
+  width: 100%; aspect-ratio: 3 / 2; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+.imgflow figcaption { margin-top: 14px; }
+
+/* flexible image row: items sit side by side and wrap when they don't fit.
+   modes: g4 = grow, min 400 (320 mobile); g3 = grow, min 320; f4 = fixed max 400;
+   c6 = grow, min 320 / max 640 */
+.flexrow { display: flex; flex-wrap: wrap; gap: 32px; margin: 48px 0; align-items: flex-start; }
+.flexrow .fr-item { margin: 0; min-width: 0; }
+.flexrow .fr-item img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.fr-g4 { flex: 1 1 400px; min-width: 400px; }
+.fr-g3 { flex: 1 1 320px; min-width: 320px; }
+.fr-f4 { flex: 0 1 400px; min-width: 320px; max-width: 400px; }
+.fr-c6 { flex: 1 1 320px; min-width: 320px; max-width: 640px; }
+.flexrow img.stroke { box-shadow: 0 0 0 1px #DCDCDC; }   /* 1px outside stroke, follows radius */
+
+/* wrapping image row: ~346px items (320 min), wrap to the next line */
+.wraprow { display: flex; flex-wrap: wrap; gap: 32px; margin: 48px 0; }
+.wrap-item { flex: 1 1 320px; max-width: 346px; margin: 0; }
+.wrap-item img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.wrap-item .ph-wrap {
+  width: 100%; aspect-ratio: 320 / 560; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+.wrap-item figcaption { margin-top: 14px; }
+
+/* image (240) + text (236) cards, 24px between; cards flow and wrap */
+.itcards { display: flex; flex-wrap: wrap; gap: 80px; margin: 48px 0; }
+.itcard { flex: 0 1 500px; display: flex; flex-wrap: wrap; gap: 24px; }
+.it-img { flex: 0 0 240px; max-width: 100%; }
+.it-img img { width: 240px; max-width: 100%; height: auto; display: block; border-radius: 14px; }
+.it-img .ph-it {
+  width: 240px; max-width: 100%; aspect-ratio: 240 / 500; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+.it-text { flex: 1 1 236px; min-width: 0; font-size: 16px; }
+.it-text p { margin: 0 0 16px; }
+.it-text p:last-child { margin-bottom: 0; }
+
+/* before -> after comparison with an arrow (points right; down on mobile) */
+.compare { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 32px; margin: 48px 0; }
+.cmp-item { flex: none; width: 240px; margin: 0; }
+.cmp-item img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.cmp-item .ph-cmp {
+  width: 100%; aspect-ratio: 240 / 480; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+.cmp-item figcaption { margin-top: 14px; }
+.cmp-arrow { flex: 0 0 80px; }
+
+/* single full-width image, respecting the page margins */
+.wide-img { max-width: none; margin: 48px 0; }
+.wide-img img {
+  width: 100%; aspect-ratio: 16 / 9; object-fit: cover;
+  border-radius: 16px; background: #f2f2f2;
+}
+figure img { width: 100%; border-radius: 16px; }
+.ph { width: 100%; border-radius: 16px; background: linear-gradient(135deg, #f4f4f4, #e9e9e9); }
+.ph {
+  aspect-ratio: 16 / 10;
+  display: flex; align-items: center; justify-content: center;
+  color: #c2c2c2; font-size: 14px; letter-spacing: 0.02em;
+}
+.ph.tall { aspect-ratio: 9 / 16; max-width: 320px; }
+figcaption { color: var(--muted); font-size: 15px; margin-top: 14px; }
+
+.gallery { display: grid; gap: 24px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); max-width: var(--textw); margin: 48px 0; }
+.gallery figure { margin: 0; }
+
+/* stat-style text blocks: bold title + body text, wrap; no rule line */
+.metrics { display: flex; flex-wrap: wrap; gap: 44px 64px; margin: 48px 0; }
+.metric { flex: 0 0 320px; max-width: 100%; }
+.metric-title { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 4px; }
+.metric-body { font-size: 20px; line-height: 1.5; }
+.metric-body .pos { color: #21a038; }
+.metric-body .neg { color: #e0533d; }
+
+/* pinterest-like masonry via CSS columns */
+.masonry { column-width: 240px; column-gap: 24px; margin: 48px 0; }
+.m-item { break-inside: avoid; margin: 0 0 24px; }
+.m-item img { width: 100%; height: auto; display: block; border-radius: 14px; }
+.masonry.stroked .m-item img { box-shadow: 0 0 0 1px #DCDCDC; }   /* opt-in 1px stroke */
+.m-item .ph-m {
+  width: 100%; aspect-ratio: 240 / 500; background: #f2f2f2; border-radius: 14px;
+  display: flex; align-items: center; justify-content: center; color: #bcbcbc; font-size: 14px;
+}
+.m-item figcaption { margin-top: 10px; }
+
+.stats { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); max-width: var(--textw); margin: 48px 0; }
+.stat { border-top: 2px solid var(--fg); padding-top: 14px; }
+.stat .num { font-size: 36px; font-weight: 600; letter-spacing: -0.02em; }
+.stat .desc { color: var(--muted); font-size: 16px; margin-top: 4px; }
+
+/* contact / about page — left aligned, top-bar side padding, 660px content column */
+.contact-block { max-width: 740px; margin: 0; padding: 72px 40px 40px; }
+.contact-block .section { margin-bottom: 96px; scroll-margin-top: 40px; }
+.contact-block h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.01em; margin: 0 0 24px; }
+.contact-block h2 { font-size: 20px; font-weight: 400; margin: 0 0 20px; line-height: 1.5; max-width: 820px; }
+.contact-block a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* --- footer --- */
+.site-footer {
+  display: flex; gap: 28px; flex-wrap: wrap;
+  justify-content: center; align-items: center;
+  height: 88px; padding: 0 40px; margin-top: 80px;
+  box-sizing: border-box;
+  border-top: 1px solid var(--line);
+  color: var(--muted); font-size: 16px;
+}
+
+/* --- responsive: tablet 810–1199 (cards stay 2-up like desktop) --- */
+@media (max-width: 1199px) and (min-width: 810px) {
+  .projects { row-gap: 80px; padding-top: 40px; }
+}
+
+/* --- responsive: mobile < 810 (single column, 16px side padding) --- */
+@media (max-width: 809px) {
+  body { font-size: 16px; }
+  .wrap { padding: 0 16px; }
+  .site-header { padding: 16px; }
+  .site-footer { padding: 0 16px; }
+  .projects { grid-template-columns: minmax(0, 320px); row-gap: 32px; padding-top: 32px; }
+  .case-head { padding-top: 48px; }
+  .case-title { font-size: 32px; }
+  .back-btn { top: 103px; }
+  .case-gallery { height: 640px; padding: 0 16px; }
+  .g-single { max-height: 560px; }   /* 640 - 40 top/bottom */
+  .shots-box { padding: 32px 16px; }
+  .shots-inner { gap: 12px; }
+  .shot-col, .shot-col img, .shot-col .ph-shot { width: 100px; }
+  .cols { flex-direction: column; gap: 32px; }
+  .col-item { width: 100%; }
+  .imgrid.c2, .imgrid.c3 { grid-template-columns: 1fr; }
+  .imgrid.c4 { grid-template-columns: 1fr 1fr; }
+  .fr-g4 { flex-basis: 320px; min-width: 320px; }
+  .compare { flex-direction: column; align-items: flex-start; }
+  .cmp-arrow { transform: rotate(90deg); }
+  .contact-block { padding: 48px 16px 40px; }
+}
+
+
+/* --- single-page views + transition --- */
+.view[hidden] { display: none; }
+.fade { animation: viewfade .28s ease; }
+@keyframes viewfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home">Ivan Rozhin<span>Product designer</span></a>
+    <nav class="nav">
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+  <main>
+  <section class="view" id="home">
+    <div class="wrap">
+    <section class="projects">
+    <a class="card" href="#mimo-balance-sheet-reconciliation" id="card-mimo-balance-sheet-reconciliation">
+      <div class="thumb">
+        <img src="assets/images/home/mimo-recon.png" alt="Mimo: Balance sheet reconciliation" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Mimo: Balance sheet reconciliation</span>
+      <div class="card-meta">2026<span class="dot"></span>AccountTech</div>
+    </a>
+    <a class="card" href="#anyfin-holistic-experience" id="card-anyfin-holistic-experience">
+      <div class="thumb">
+        <img src="assets/images/home/01.png" alt="Anyfin: holistic user experience" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Anyfin: holistic user experience</span>
+      <div class="card-meta">2023<span class="dot"></span>Fintech</div>
+    </a>
+    <a class="card" href="https://www.figma.com/proto/W7fCHhnBwdJO5zzFdS68z9/Product-vision-for-Investments-at-Sberbank?page-id=224%3A53820&amp;type=design&amp;node-id=64292-33218&amp;viewport=3020%2C3980%2C0.14&amp;t=rGd8bgvc6i4ds9rw-1&amp;scaling=scale-down&amp;mode=design" target="_blank" rel="noopener">
+      <div class="thumb">
+        <img src="assets/images/home/03.png" alt="Product vision for investments at Sberbank" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+        <svg class="ext-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </div>
+      <span class="card-title">Product vision for investments at Sberbank</span>
+      <div class="card-meta">2022<span class="dot"></span>Fintech</div>
+    </a>
+    <a class="card" href="#intensive-care-monitoring" id="card-intensive-care-monitoring">
+      <div class="thumb">
+        <img src="assets/images/home/02.png" alt="Intensive care monitoring system" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Intensive care monitoring system</span>
+      <div class="card-meta">2020<span class="dot"></span>Health</div>
+    </a>
+    <a class="card" href="#credit-score-tracker" id="card-credit-score-tracker">
+      <div class="thumb">
+        <img src="assets/images/home/04.png" alt="Anyfin&#x27;s Credit score tracker" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Anyfin&#x27;s Credit score tracker</span>
+      <div class="card-meta">2024<span class="dot"></span>Fintech</div>
+    </a>
+    <a class="card" href="#mimo-design-framework" id="card-mimo-design-framework">
+      <div class="thumb">
+        <img src="assets/images/home/mimo.png" alt="Mimo design framework: from SaaS to agentic in 1 month" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Mimo design framework: from SaaS to agentic in 1 month</span>
+      <div class="card-meta">2026<span class="dot"></span>AccountTech</div>
+    </a>
+    <a class="card" href="#anyfin-rethinking-refinance" id="card-anyfin-rethinking-refinance">
+      <div class="thumb">
+        <img src="assets/images/home/05.png" alt="Re-thinking refinance product in Anyfin app" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Re-thinking refinance product in Anyfin app</span>
+      <div class="card-meta">2022<span class="dot"></span>Fintech</div>
+    </a>
+    <a class="card" href="#endowment-life-insurance-v2" id="card-endowment-life-insurance-v2">
+      <div class="thumb">
+        <img src="assets/images/home/06.png" alt="Endowment life insurance: made for users this time" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Endowment life insurance: made for users this time</span>
+      <div class="card-meta">2021<span class="dot"></span>Fintech</div>
+    </a>
+    <a class="card" href="#endowment-life-insurance" id="card-endowment-life-insurance">
+      <div class="thumb">
+        <img src="assets/images/home/07.png" alt="Endowment life insurance: the very first time launched online" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">Endowment life insurance: the very first time launched online</span>
+      <div class="card-meta">2020<span class="dot"></span>Fintech</div>
+    </a>
+    <a class="card" href="#21pub" id="card-21pub">
+      <div class="thumb">
+        <img src="assets/images/home/08.png" alt="The bridge between online and offline for HoReCa" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">The bridge between online and offline for HoReCa</span>
+      <div class="card-meta">2020<span class="dot"></span>Concept</div>
+    </a>
+    <a class="card" href="#ux-research" id="card-ux-research">
+      <div class="thumb">
+        <img src="assets/images/home/09.png" alt="UX research &amp; design upgrades for sales department" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+        <div class="ph" style="display:none;height:100%">Add image</div>
+      </div>
+      <span class="card-title">UX research &amp; design upgrades for sales department</span>
+      <div class="card-meta">2019<span class="dot"></span>E-commerce</div>
+    </a>
+    </section>
+    </div>
+  </section>
+  <section class="view case-view" id="mimo-balance-sheet-reconciliation" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-mimo-balance-sheet-reconciliation"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title"><span class="accent-mimo">Mimo</span>: Balance sheet reconciliation</h1>
+        <p>Designed and delivered a balance sheet reconciliation workflow which helps accountants save hours of detective work by analyzing transactions, highlighting anomalies and suggesting actions to prepare their books for month-end close.</p>
+      </header>
+      <div class="case-gallery fit" style="background: #D5DFD1;">
+        <div class="g-row g-row-1">
+          <img class="g-single" src="assets/images/mimo-balance-sheet-reconciliation/1.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>About the project</h2>
+  <p>Every business needs to reconcile their balance sheet to ensure correct reporting. Accountants need to know all the details about each client and do a lot of investigation and sense-checking to make sure the numbers are right. Given that every client is different, this job takes a lot of effort and requires several different tools. We at Mimo took a stab at simplifying this process by outsourcing the detective work to the smart workflow which does all the preparation in minutes and lets accountant review prepared results rather than doing all the work manually.</p>
+  <h2>In parallel with developing a new design framework</h2>
+  <p>The timing of this project overlapped with us developing new Mimo design framework. It was an enabler without which balance sheet reconciliation would've been less flexible and more linked to a concrete actions. Given that all accounting firms are different, and all their clients are different, we decided that it's not worth to design a product with hard constraints and agreed to use a new design framework to enable agentic design. As a bonus we got an opportunity to stress test it together with a product.</p>
+  <div class="imgrid c1">
+          <figure><img class="gbox" src="assets/images/mimo-balance-sheet-reconciliation/2.png" alt="New Mimo design framework" loading="lazy"><figcaption>New Mimo design framework</figcaption></figure>
+  </div>
+  <h2>Discovery, discovery, discovery</h2>
+  <p>First, we ran a couple of workshops to map out initial user flows and list key hypotheses for the balance sheet reconciliation. Since none of us worked as an accountant, we needed to paint a picture from scratch.</p>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/mimo-balance-sheet-reconciliation/3.png" alt="Mapping out the initial user flows" loading="lazy"><figcaption>Mapping out the initial user flows</figcaption></figure>
+  </div>
+  <div class="imgrid c1" style="max-width:420px">
+          <figure><img src="assets/images/mimo-balance-sheet-reconciliation/4.png" alt="Key scenarios simplified" loading="lazy"><figcaption>Key scenarios simplified</figcaption></figure>
+  </div>
+  <p>Next, we started to prepare for user testing. Initially we followed the traditional way and made quick Figma prototypes. After first round of internal discussions and testing with our partners we decided to try another approach and made a fully functional realistic claude prototype. 2 reasons behind that:</p>
+  <ol><li>The design framework was genuinely new, and some details and interactions needed careful testing</li><li>It&#x27;s hard to do a thorough tests with static data and mockups. Highly detailed realistic prototype decreases the risk of misunderstanding and lifts more concrete findings.</li></ol>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/mimo-balance-sheet-reconciliation/5.png" alt="Design system skill for prototyping" loading="lazy"><figcaption>Design system skill for prototyping</figcaption></figure>
+  </div>
+  <p>We conducted 6 testing sessions total. Some hypotheses were proven, some things needed to be rethought, but in the end we were happy with the solution.</p>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/mimo-balance-sheet-reconciliation/6.png" alt="Six user testing sessions" loading="lazy"><figcaption>Six user testing sessions</figcaption></figure>
+  </div>
+  <h2>Development in parallel</h2>
+  <p>Devs started implementation before we finished all the testing. This approach helped us speed things up: by the time we were done with the solutions, developers were ready to do the final polishing.</p>
+  <h2>Launch and first results</h2>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/mimo-balance-sheet-reconciliation/7.png" alt="" loading="lazy"></figure>
+  </div>
+  <p>We opened a beta for our partners about 2 months after we started. First results were controversial: some things worked fine, some things needed tweaking. The solution itself was fine: nobody got confused in terms of where to go and what to click. The problem was in quality of the conversation and results reliability: it wasn't consistently good and sometimes went off-track. We took these learnings to rethink some parts of our product.</p>
+  <h2>Iterations</h2>
+  <p>We didn't take the beta down, but continued iterating on it. The pace was quite fast with the goal to deliver continuous fixes in 2 weeks. We also made some changes to the solution, and decided to start with the most demanded reconciliations instead of doing everything at once.</p>
+  <div class="imgrid c1">
+          <figure><img class="flat" src="assets/images/mimo-balance-sheet-reconciliation/8.png" alt="" loading="lazy"></figure>
+  </div>
+  <h2>Done, but still ongoing</h2>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/mimo-balance-sheet-reconciliation/9.png" alt="Balance sheet page with quick access to the reconciliation" loading="lazy"><figcaption>Balance sheet page with quick access to the reconciliation</figcaption></figure>
+  </div>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/mimo-balance-sheet-reconciliation/10.png" alt="Details for each reconciliation at glance" loading="lazy"><figcaption>Details for each reconciliation at glance</figcaption></figure>
+  </div>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/mimo-balance-sheet-reconciliation/11.png" alt="Reconciliation workflow in action" loading="lazy"><figcaption>Reconciliation workflow in action</figcaption></figure>
+  </div>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/mimo-balance-sheet-reconciliation/12.png" alt="Reconciliation results and suggested actions" loading="lazy"><figcaption>Reconciliation results and suggested actions</figcaption></figure>
+  </div>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/mimo-balance-sheet-reconciliation/13.png" alt="Detailed analysis and suggestions" loading="lazy"><figcaption>Detailed analysis and suggestions</figcaption></figure>
+  </div>
+  <p>We continue working on the balance sheet reconciliation, focusing on batches of prioritized recs at a time.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="mimo-design-framework" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-mimo-design-framework"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title"><span class="accent-mimo">Mimo</span> design framework: from SaaS to agentic in 1 month</h1>
+        <p>Given Mimo's ambition to deliver the smartest solution for accountants, our design team needed to transform the way we work and deliver solutions. Our goal was to shift things in a way that would allow us to focus on discovery and problem solving rather than targeted custom solutions. Here's how we did it.</p>
+      </header>
+      <div class="case-gallery fit" style="background: #D5DFD1;">
+        <div class="g-row g-row-1">
+          <img class="g-single" src="assets/images/mimo-design-framework/1.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>From unnecessary complexity to meaningful simplicity</h2>
+  <p>Accounting is complex enough on its own. Accountants have dozens of tools which they use alongside their excel sheets. They have hundreds of clients and spend a tremendous amount of time on repetitive tasks rather than on delivering their expertise. Initially Mimo was aiming at solving that, but in a rather old fashion way. Specific interfaces targeting specific problems, narrow use cases, limited capabilities – it was all fine until the tools like Claude started showing that it could be done differently.</p>
+  <div class="flexrow">
+        <figure class="fr-item fr-g4"><img class="stroke" src="assets/images/mimo-design-framework/2.png" alt="Payments page designed to serve payments only" loading="lazy"><figcaption>Payments page designed to serve payments only</figcaption></figure>
+        <figure class="fr-item fr-g4"><img class="stroke" src="assets/images/mimo-design-framework/3.png" alt="Collect documents page with non-flexible functionality" loading="lazy"><figcaption>Collect documents page with non-flexible functionality</figcaption></figure>
+        <figure class="fr-item fr-g4"><img class="stroke" src="assets/images/mimo-design-framework/4.png" alt="Adjustments page with custom solutions only for adjustments" loading="lazy"><figcaption>Adjustments page with custom solutions only for adjustments</figcaption></figure>
+        <figure class="fr-item fr-g4"><img class="stroke" src="assets/images/mimo-design-framework/5.png" alt="Non-flexible drawer example" loading="lazy"><figcaption>Non-flexible drawer example</figcaption></figure>
+        <figure class="fr-item fr-g4"><img class="stroke" src="assets/images/mimo-design-framework/6.png" alt="Non-flexible drawer example" loading="lazy"><figcaption>Non-flexible drawer example</figcaption></figure>
+  </div>
+  <p>This was the moment we decided to pivot the way our product works, and give accountants flexible tools that will work under the hood and give them full control of the results.</p>
+  <p>For the design team it meant that we needed to revisit the way we do things.</p>
+  <h3 class="sub">Design system upgrade</h3>
+  <p>Not just components, but the system as a whole. The one we had was quite detailed and well-built given the limited prioritisation it got, but it didn't fit the new reality of the tool where the solution isn't set in stone, but adapts to user's request.</p>
+  <div class="flexrow">
+        <figure class="fr-item fr-f4"><img class="stroke" src="assets/images/mimo-design-framework/7.png" alt="Original DS foundations" loading="lazy"><figcaption>Original DS foundations</figcaption></figure>
+        <figure class="fr-item fr-g3"><img class="stroke" src="assets/images/mimo-design-framework/8.png" alt="Specific components for each card type" loading="lazy"><figcaption>Specific components for each card type</figcaption></figure>
+  </div>
+  <h3 class="sub">Enrich the design system</h3>
+  <p>It often gets mistreated and slimmed down to a component library, but we believed it should cover the whole experience, from how the product sounds to how it feels to the user.</p>
+  <h3 class="sub">Adjust the design process</h3>
+  <p>Changing from designing SaaS to agentic product is quite a big leap, and it meets a lot of friction internally. We needed to do a lot of discovery and iterate on the process until we got to a place that felt right.</p>
+  <h2>How did we make it happen?</h2>
+  <h3 class="sub">Discovery</h3>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/mimo-design-framework/9.png" alt="Benchmarking and key scenarios" loading="lazy"><figcaption>Benchmarking and key scenarios</figcaption></figure>
+          <figure><img src="assets/images/mimo-design-framework/10.png" alt="One of the prioritisation workshops" loading="lazy"><figcaption>One of the prioritisation workshops</figcaption></figure>
+  </div>
+  <p>Probably the hardest part of the whole shift-to-agentic story. Partially it's easy – check how other agentic solutions work, understand what's the experience like, see what can be adopted, what should be skipped, etc. The hardest part is to shift the mindset from “this card should contain this information” to “I don't know exactly what will user interact with, but here're all scenarios we need to consider”. In the end of the day, we landed on the most practical concept we could find at a time – generative ui adjusted to our product needs.</p>
+  <div class="imgrid c1">
+          <figure><img class="graybg" src="assets/images/mimo-design-framework/11.png" alt="" loading="lazy"></figure>
+  </div>
+  <h3 class="sub">Constant sync with product and devs.</h3>
+  <p>We worked very closely together and shared every bit of what we found out to make sure the design framework will be easy to implement, easy to follow and, most importantly, easy to reuse and evolve.</p>
+  <h3 class="sub">Iterations</h3>
+  <div class="flexrow">
+        <figure class="fr-item fr-g3"><img class="stroke" src="assets/images/mimo-design-framework/12.png" alt="One day of iterations" loading="lazy"><figcaption>One day of iterations</figcaption></figure>
+        <figure class="fr-item fr-f4"><img class="stroke" src="assets/images/mimo-design-framework/13.png" alt="Iterations history" loading="lazy"><figcaption>Iterations history</figcaption></figure>
+  </div>
+  <p>We tried dozens of different ways of how things could look, feel and behave. Given limited time we were doing this as a prep-work for a new product feature, so the use cases were scoped to support them first, with ambition to grow and evolve the framework later.</p>
+  <h3 class="sub">Polishing and stress-testing</h3>
+  <p>After iterating we landed on the framework that was aligned with our plans most. Given that the new product capability was already being implemented, we got a chance to stress-test the framework and the product at the same time.</p>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/mimo-design-framework/14.png" alt="" loading="lazy"></figure>
+  </div>
+  <p>A couple of flaws were found and fixed, without major time sink.</p>
+  <h2>New Mimo agentic framework</h2>
+  <p>In only a month we managed to come up with a new design framework, covering all must haves for the planned H2 releases. From conversation to how user can adjust what they see – the majority of things was covered.</p>
+  <div class="imgrid c1" style="max-width:960px">
+          <figure><img class="stroke" src="assets/images/mimo-design-framework/15.png" alt="Framework flexible components" loading="lazy"><figcaption>Framework flexible components</figcaption></figure>
+  </div>
+  <div class="imgrid c1" style="max-width:960px">
+          <figure><img class="stroke" src="assets/images/mimo-design-framework/16.png" alt="Detailed component for a scenario" loading="lazy"><figcaption>Detailed component for a scenario</figcaption></figure>
+  </div>
+  <div class="imgrid c1" style="max-width:960px">
+          <figure><img class="stroke" src="assets/images/mimo-design-framework/17.png" alt="Skills we built to speed up the process" loading="lazy"><figcaption>Skills we built to speed up the process</figcaption></figure>
+  </div>
+  <p>It allowed us to focus on discovery for the major product updates and save time on designing solutions – framework already covered that. Is it ideal? I'd say not really, it has its flaws. But at this point it allows Mimo to move on much faster than before, which is the main goal for now.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="anyfin-holistic-experience" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-anyfin-holistic-experience"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title"><span class="accent-anyfin">Anyfin</span>: holistic experience</h1>
+        <p class="case-subtitle">Bringing holistic user experience into the app</p>
+        <p>I joined Anyfin in April 2022. Shortly after that, recession hit the EU. In this new reality our service became even more relevant for people with debts. Therefore we needed to focus even more on delivering the best experience to our existing and potential users.</p>
+      </header>
+      <div class="case-gallery" style="background: #FFF8E6;">
+        <div class="g-row">
+          <img class="g-side"   src="assets/images/anyfin-holistic-experience/1.png" alt="" loading="lazy">
+          <img class="g-center" src="assets/images/anyfin-holistic-experience/2.png" alt="" loading="lazy">
+          <img class="g-side"   src="assets/images/anyfin-holistic-experience/3.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>Status quo</h2>
+  <p>Originally, Anyfin was focusing on personal finances overall. We had savings, financial insights, etc. etc.</p>
+  <p>But since the situation has changed, and the economy didn't look as good as it used to, we decided that we want to focus on the thing we do best – helping people in debt.</p>
+  <p>So, amongst other things, we needed to adjust our product and make it fit our new focus area.</p>
+  <figure class="shots-group">
+        <div class="shots-box"><div class="shots-inner">
+            <div class="shot-col"><img src="assets/images/anyfin-holistic-experience/4.png" alt="Credits: first tab, not the main focus" loading="lazy"><figcaption>Credits: first tab, not the main focus</figcaption></div>
+            <div class="shot-col"><img src="assets/images/anyfin-holistic-experience/5.png" alt="Overview with different widgets" loading="lazy"><figcaption>Overview with different widgets</figcaption></div>
+            <div class="shot-col"><img src="assets/images/anyfin-holistic-experience/6.png" alt="Savings still in place back then" loading="lazy"><figcaption>Savings still in place back then</figcaption></div>
+        </div></div>
+  </figure>
+  <h2>Main problems to solve</h2>
+  <p>Four things were on top of our mind:</p>
+  <ul><li>Our product didn&#x27;t have a clear focus</li><li>We had a “pick and choose” concept, which made the product not intuitive enough</li><li>The product was not flexible enough. For instance, if we wanted to add a new feature, it was really hard to find a proper place in the app for it.</li><li>Since things were scattered here and there, app lacked consistency</li></ul>
+  <p>To make our product fit the new strategy, these issues needed to be solved, as quickly as possible. And not just “ad-hoc” solved, but properly fixed, so that the new structure could be future-proof and support the next improvements and experiments.</p>
+  <h2>Research</h2>
+  <p>First things first. To deliver the best result for our users, we needed to know them even better than we did at that moment. Of course we had some previous research results, but they were from the “calm times”, therefore they didn't really work in this case.</p>
+  <p>We knew that if we want to get the best result, we need to understand not only users behaviour, but also their background. How did they get into debt, what were the triggers, how do they deal with it on a daily basis, how do they feel about it, and other essential aspects one needs to know to design a good experience.</p>
+  <p>Long story short, we conducted 20 user interviews, each 1,5 hours long. Users were divided in 2 groups, and each group was also split in half – our current users vs non-users. Doing this allowed us to get the bigger picture and understand their real expectations. To sum up the outcome, I can say that we got:</p>
+  <ul><li>Key scenarios for each user group</li><li>Customer journey from the debt-free life to dealing with debts using Anyfin service</li><li>Users&#x27; expectations, both emotional and informational</li><li>20+ insights which we actually were not aware of</li><li>10+ proofed hypotheses</li></ul>
+  <figure class="shots-group">
+        <div class="shots-box"><div class="shots-stack">
+          <div class="g-stack-item"><img style="max-width:920px" src="assets/images/anyfin-holistic-experience/7.png" alt="A glance at CJM" loading="lazy"><figcaption>A glance at CJM</figcaption></div>
+        </div></div>
+  </figure>
+  <h2>Design</h2>
+  <p>With the research results in place, we started the design process.</p>
+  <p>We decided to put a very simple idea in the core – to make our service work based on how people in debt see their finances. And it is as simple as ”the money I have vs the money I have to spend”.</p>
+  <p>With this idea set, we started defining the purpose of each part of our app.</p>
+  <figure class="shots-group">
+        <div class="shots-box"><div class="shots-stack">
+          <div class="g-stack-item"><img style="max-width:840px" src="assets/images/anyfin-holistic-experience/8.png" alt="" loading="lazy"></div>
+        </div></div>
+  </figure>
+  <p>Even though our product might feel simple, it's a complicated financial service with tons of different scenarios. And all of those needed to stay, but to be transformed into intuitive flows.</p>
+  <p>So we did another pre-work – mapped out every key scenario and put it in the chart, to keep things high-level and easy-to-discuss with everyone.</p>
+  <figure class="shots-group">
+        <div class="shots-box"><div class="shots-stack">
+          <div class="g-stack-item"><img style="max-width:920px" src="assets/images/anyfin-holistic-experience/9.png" alt="" loading="lazy"></div>
+          <div class="g-stack-item"><img style="max-width:920px" src="assets/images/anyfin-holistic-experience/10.png" alt="" loading="lazy"></div>
+        </div></div>
+  </figure>
+  <p>When all the flows were done, it was time to move forward and make the final designs. We've started with the ideal version, and then scaled it down to feasible steps that could be quickly released.</p>
+  <h2>Home and the main insights</h2>
+  <div class="cols">
+    <figure class="col-item"><img src="assets/images/anyfin-holistic-experience/11.png" alt="Home tab" loading="lazy"><figcaption>Home tab</figcaption></figure>
+    <figure class="col-item"><img src="assets/images/anyfin-holistic-experience/12.png" alt="“How much money do I have” insight" loading="lazy"><figcaption>“How much money do I have” insight</figcaption></figure>
+    <figure class="col-item"><img src="assets/images/anyfin-holistic-experience/13.png" alt="“What do I have to pay for” insight" loading="lazy"><figcaption>“What do I have to pay for” insight</figcaption></figure>
+  </div>
+  <h2>Debt management</h2>
+  <div class="cols">
+    <figure class="col-item"><img src="assets/images/anyfin-holistic-experience/14.png" alt="All user&#x27;s debts in one place" loading="lazy"><figcaption>All user&#x27;s debts in one place</figcaption></figure>
+    <figure class="col-item"><img src="assets/images/anyfin-holistic-experience/15.png" alt="All debt payments in one place" loading="lazy"><figcaption>All debt payments in one place</figcaption></figure>
+  </div>
+  <h2>Extra features</h2>
+  <div class="cols">
+    <figure class="col-item"><img src="assets/images/anyfin-holistic-experience/16.png" alt="Slightly simplified widgets" loading="lazy"><figcaption>Slightly simplified widgets</figcaption></figure>
+    <figure class="col-item"><img src="assets/images/anyfin-holistic-experience/17.png" alt="Settings and other info in one place" loading="lazy"><figcaption>Settings and other info in one place</figcaption></figure>
+  </div>
+  <h2>Problem → Fix</h2>
+  <p>The launch of the update went quite smoothly. We kept an eye on all the key metrics to be sure that business is not affected by the implemented changes.</p>
+  <p>And, as always, shortly after release, we noticed one improvement we should make. Customers were a bit confused by the key insights we put on top of the home tab. There were both technical and copy issues.</p>
+  <p>The copy problem we fixed very quickly, so this confusion has been removed. Technical issues, however, needed more time to be investigated and solved.</p>
+  <p>We had a choice: give it as much time as needed or act quickly and maybe find something more valuable for the users. We chose the second option.</p>
+  <p>After a quick round of discussions, brainstorms and some ideation we found a good solution, which made sense for both users and our business. We decided to give the top estate for our core refinancing product, since at that point of time it was the most valuable thing for the user. And also the product we're proud of.</p>
+  <figure class="shots-group">
+        <div class="shots-box"><div class="shots-stack">
+          <div class="g-stack-item"><img style="max-width:780px" src="assets/images/anyfin-holistic-experience/18.png" alt="" loading="lazy"></div>
+        </div></div>
+  </figure>
+  <p>We implemented this change quickly and kept monitoring all key metrics. It turned out to be a successful bet – reach-outs to the Customer support decreased, customers stopped missing their payments and the key info about their refinanced loans.</p>
+  <p>This update also allowed us to do a better communication about customer's payments. We already had this improvement planned, but, thanks to this update, it happened much faster than it could.</p>
+  <figure class="shots-group">
+        <div class="shots-box"><div class="shots-stack">
+          <div class="g-stack-item"><img style="max-width:656px" src="assets/images/anyfin-holistic-experience/19.png" alt="" loading="lazy"></div>
+        </div></div>
+  </figure>
+  <h2>Outcome 🔮</h2>
+  <p>In only 3 months we managed to release the biggest update for Anyfin app, which is only the beginning of our journey. We made a flexible structure that fits our short and long term goals. We made a base for future improvements of the product. We made it scalable. It became more intuitive. End of chapter 2.0. Moving on to 2.1.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="intensive-care-monitoring" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-intensive-care-monitoring"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title">Intensive care monitoring system</h1>
+        <p class="case-subtitle">A digital tool for intensive care units</p>
+        <p>Hospitals are often facing budget limitations. Because of this, expensive equipment could become an issue, which could result in both endangering patients and making hospital staff's work routines unnecessary complicated. Therefore, our client came up with an idea of an accessible monitoring system, an additional tool that could be used by both doctors and nurses.</p>
+        <p>This system was not supposed to completely replace professional medical monitors in the near future. Its main purpose was to simplify the doctors' and nurses' daily life and automate those processes that could and should be automated.</p>
+      </header>
+      <div class="case-gallery" style="background: #EBE2DB;">
+        <div class="g-row g-row-1">
+          <img class="g-single" src="assets/images/intensive-care-monitoring/1.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>Difficulties</h2>
+  <p>Right after the first brief we identified several points that were very important to keep in mind at every step of this project.</p>
+  <ul><li>Medicine is a huge area of expertise – but we must thoroughly understand at least a part of it that is related to the intense care</li><li>Doctors and nurses can be less familiar with digital environment – so we have to be extra careful and use as many medical industry familiar patterns as we can</li><li>Doctors will have very little time for us – so we must not distract them from important matters and prepare questions very carefully</li><li>We have to triple check every solution – because the cost of error can be catastrophically high</li></ul>
+  <h2>Research</h2>
+  <p>First, we conducted an online interview with some people who work at the hospital.</p>
+  <div class="imgrid c1" style="max-width:900px">
+          <figure><img src="assets/images/intensive-care-monitoring/2.png" alt="Research participants" loading="lazy"><figcaption>Research participants</figcaption></figure>
+  </div>
+  <p class="ul-lead">We wanted to understand:</p>
+  <ul><li>how a typical doctor&#x27;s working day looks</li><li>the responsibilities for different roles</li><li>how they act in a critical situation</li><li>the daily work pain points</li></ul>
+  <p class="ul-lead">We needed all this information to:</p>
+  <ul><li>map out a typical doctor&#x27;s or nurse&#x27;s daily scenario</li><li>find situations in which the future system could be useful</li><li>understand when the system should fade into the background and not interfere with real work</li></ul>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/intensive-care-monitoring/3.png" alt="The first high-level draft of the Doctor&#x27;s Day scenario" loading="lazy"><figcaption>The first high-level draft of the Doctor&#x27;s Day scenario</figcaption></figure>
+  </div>
+  <p>After we drafted the scenario, we went to the hospital to observe the actual doctor's and nurse's work.</p>
+  <p class="ul-lead">Our goals were to:</p>
+  <ul><li>check if the scenario was correct</li><li>evaluate potential features</li><li>dive deeper into the context of each situation</li></ul>
+  <p>In the end, we managed not only to observe the intensive care unit's work, but also conducted several more interviews with the nurses and the head of the unit. This got us several insights and a wish list for the system from those who will actually use it on a daily basis.</p>
+  <h2>Step back and two steps forward</h2>
+  <p>When the research was done, we've started sketching. But we quickly realised that the drafts we made were too UI focused, which made it too difficult to evaluate them. The final solution should be 100% based on the scenarios we got from the research. So, we decided to play it safe and took a step back to do another round of analysis.</p>
+  <p>We divided the general scenario into 21 micro-scenarios – specific situations that occur every day in the intensive care unit.</p>
+  <p>After that, we broke them down to the specific actions that the doctor does in each specific situation. In addition to that we also complemented each scenario with its alternative version, to make sure we have a solution for the case when things don't go as they should.</p>
+  <p>In this exercise we didn't do any visual designs, just the logic part of the future system. This allowed us to concentrate on the real life context and identify so-called “Attention focuses” – what exactly is on one's mind at a certain point of the scenario.</p>
+  <p>This approach is very useful when you need to find a solution to real user problems. Also, after this exercise is done, designs are very easy to check and test.</p>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/intensive-care-monitoring/4.png" alt="Fragment of micro-scenarios analysis" loading="lazy"><figcaption>Fragment of micro-scenarios analysis</figcaption></figure>
+  </div>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/intensive-care-monitoring/5.png" alt="Visualisation of the Attention focuses" loading="lazy"><figcaption>Visualisation of the Attention focuses</figcaption></figure>
+  </div>
+  <h2>Design</h2>
+  <p>Initially, the client had already had the MVP version of the product. But it was a bit difficult to understand, and it needed too much attention to itself. To make it work you needed to configure everything manually.</p>
+  <div class="imgrid c1">
+          <figure><img class="stroke" src="assets/images/intensive-care-monitoring/6.png" alt="The original version wasn&#x27;t intuitive enough" loading="lazy"><figcaption>The original version wasn&#x27;t intuitive enough</figcaption></figure>
+          <figure><img class="stroke" src="assets/images/intensive-care-monitoring/7.png" alt="It was unclear what to expect from the system" loading="lazy"><figcaption>It was unclear what to expect from the system</figcaption></figure>
+  </div>
+  <p>We agreed to change the whole thing and make it as simple and intuitive as possible, so that users don't have to spend a lot of time studying it.</p>
+  <p>We decided to start from the general patient monitoring and a patient card. These functions mostly duplicate professional medical bedside monitors, so we started looking for references and common patterns.</p>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/intensive-care-monitoring/8.png" alt="Some medical monitors we used as references" loading="lazy"><figcaption>Some medical monitors we used as references</figcaption></figure>
+  </div>
+  <h2>General monitoring</h2>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/intensive-care-monitoring/9.png" alt="The main screen for general patient monitoring" loading="lazy"><figcaption>The main screen for general patient monitoring</figcaption></figure>
+  </div>
+  <div class="imgrid c2">
+          <figure><img src="assets/images/intensive-care-monitoring/10.png" alt="The screen consists of 8 patient cards. For each of them, you can track 3 selected indicators." loading="lazy"><figcaption>The screen consists of 8 patient cards. For each of them, you can track 3 selected indicators.</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/11.png" alt="While hover, additional functions appear" loading="lazy"><figcaption>While hover, additional functions appear</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/12.png" alt="In the card settings, you can select 3 main indicators that need to be monitored" loading="lazy"><figcaption>In the card settings, you can select 3 main indicators that need to be monitored</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/13.png" alt="Disabled notifications" loading="lazy"><figcaption>Disabled notifications</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/14.png" alt="Patient&#x27;s metrics that need immediate attention" loading="lazy"><figcaption>Patient&#x27;s metrics that need immediate attention</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/15.png" alt="Critical alerts" loading="lazy"><figcaption>Critical alerts</figcaption></figure>
+  </div>
+  <h2>Selected patient monitoring</h2>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/intensive-care-monitoring/16.png" alt="The system allows doctors to view the patient&#x27;s condition record for any day" loading="lazy"><figcaption>The system allows doctors to view the patient&#x27;s condition record for any day</figcaption></figure>
+  </div>
+  <div class="imgrid c2">
+          <figure><img src="assets/images/intensive-care-monitoring/17.png" alt="Checking metrics at any point of time" loading="lazy"><figcaption>Checking metrics at any point of time</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/18.png" alt="Charts can be customized" loading="lazy"><figcaption>Charts can be customized</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/19.png" alt="Full diagnosis" loading="lazy"><figcaption>Full diagnosis</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/20.png" alt="Other patients alerts" loading="lazy"><figcaption>Other patients alerts</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/21.png" alt="Logging incidents and other data" loading="lazy"><figcaption>Logging incidents and other data</figcaption></figure>
+  </div>
+  <p>Some solutions may seem a bit old-fashioned, but they were chosen on purpose. They make it easier for the doctor to work with the system.</p>
+  <h2>Patient prescription list</h2>
+  <p>In the client's version, almost any action with the patient could be logged. We left only the most important things – injections, infusions and food. These are necessary for monitoring the liquid balance in the patient's body, which is a very important indicator.</p>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/intensive-care-monitoring/22.png" alt="Doctor and nurse can see everything a patient needs to get during the day" loading="lazy"><figcaption>Doctor and nurse can see everything a patient needs to get during the day</figcaption></figure>
+  </div>
+  <div class="imgrid c2">
+          <figure><img src="assets/images/intensive-care-monitoring/23.png" alt="Prescription templates" loading="lazy"><figcaption>Prescription templates</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/24.png" alt="Logging all details" loading="lazy"><figcaption>Logging all details</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/25.png" alt="Cancelled medicine" loading="lazy"><figcaption>Cancelled medicine</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/26.png" alt="Working with prescription" loading="lazy"><figcaption>Working with prescription</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/27.png" alt="Adding a complex infusion" loading="lazy"><figcaption>Adding a complex infusion</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/28.png" alt="Change history" loading="lazy"><figcaption>Change history</figcaption></figure>
+  </div>
+  <p>We also added one more feature - checking prescriptions for all patients in the unit. This greatly simplifies the work of nurses.</p>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/intensive-care-monitoring/29.png" alt="" loading="lazy"></figure>
+  </div>
+  <h2>Paperwork</h2>
+  <p>The third thing we needed to improve was the paperwork automation. The system can automatically generate all the necessary documents for consumables, tests, reports, and it can store files (images, electrocardiogram recordings, etc.). This saves a lot of time when it comes to preparing daily reports, maintaining medical records and transferring patients between units.</p>
+  <div class="imgrid c2">
+          <figure><img src="assets/images/intensive-care-monitoring/30.png" alt="Documents are automatically generated" loading="lazy"><figcaption>Documents are automatically generated</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/31.png" alt="All patient related files are stored in one place" loading="lazy"><figcaption>All patient related files are stored in one place</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/32.png" alt="Test results could be tracked in real time" loading="lazy"><figcaption>Test results could be tracked in real time</figcaption></figure>
+          <figure><img src="assets/images/intensive-care-monitoring/33.png" alt="Patient&#x27;s history" loading="lazy"><figcaption>Patient&#x27;s history</figcaption></figure>
+  </div>
+  <h2>Outcome 🪄</h2>
+  <p>We designed a system that simplifies the daily work for doctors, nurses and heads of departments in intensive care. This required a very deep dive into an incredibly complex sphere. Through careful research and testing, we made an intuitive product. This is especially important for medicine, because the cost of an error can be very high.</p>
+  <p>Our hypothesis was that the system should retain the traditional equipment patterns, and it should be easier for doctors and nurses to solve their problems in a familiar environment.</p>
+  <p>Each iteration was tested, and in the end we came to a solution that future users understood without a hint.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="credit-score-tracker" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-credit-score-tracker"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title"><span class="accent-anyfin">Anyfin</span>'s Credit score tracker</h1>
+        <p class="case-subtitle">A playful way to help people understand their debt</p>
+        <p>Anyfin's main goal at the time was helping people understand and deal with their debts. The “deal” part was already covered with the loan refinance, company's core product. But the “understanding” was a huge field to discover. So we decided that we want to give our users probably the most essential tool to understand their debt situation: a Credit score tracker.</p>
+      </header>
+      <div class="case-gallery" style="background: linear-gradient(rgba(102,140,194,.2), rgba(102,140,194,.2)), linear-gradient(180deg, #2E2511, #110925);">
+        <div class="g-row">
+          <img class="g-side"   src="assets/images/credit-score-tracker/1.png" alt="" loading="lazy">
+          <img class="g-center" src="assets/images/credit-score-tracker/2.png" alt="" loading="lazy">
+          <img class="g-side"   src="assets/images/credit-score-tracker/3.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>Why Credit score tracker?</h2>
+  <p>It was the first thing we all asked ourselves. At first glance it might seem not very interesting or groundbreaking.</p>
+  <p>So, naturally, we started by looking at the competition. And, to our surprise, we haven't found one we loved. They all lacked something – sometimes simplicity, sometimes information...</p>
+  <p>But more importantly such a tool was perfectly aligned with our mission – help people understand and deal with their debt.</p>
+  <p>With this in mind and the estimated user potential (which we estimated to be quite good) we started working on our Credit score tracker.</p>
+  <h2>But...how?</h2>
+  <p>The idea of a credit score itself is quite simple: show people their score, break it down in a simple way, and that's it.</p>
+  <p>The tricky part was that there were a bunch of other trackers on the market already.</p>
+  <p>So the first thing we did was exploring potential solutions. And we had quite a few options in the end.</p>
+  <div class="imgrid c4" style="max-width:1056px">
+          <figure><img src="assets/images/credit-score-tracker/4.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/credit-score-tracker/5.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/credit-score-tracker/6.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/credit-score-tracker/7.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/credit-score-tracker/8.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/credit-score-tracker/9.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/credit-score-tracker/10.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/credit-score-tracker/11.png" alt="" loading="lazy"></figure>
+  </div>
+  <p>After a couple of iterations and tons of options we landed on one simple thought: if we want users to use and like our credit score, it should stand out. We took it as a core principle and started over.</p>
+  <h2>Make it stand out</h2>
+  <p>This simple idea turned our project into a very fun one. We focused on delight and simplicity as the key factors that should balance the seriousness of the information we give our users.</p>
+  <div class="split">
+        <div class="split-text"><h3 class="split-h">Anyfin mascot</h3><p>First, we brought back Anyfin's old mascot – the dolphin. It was quite well known in Sweden, but Anyfin stopped using it some time ago. So we thought it was a good time for a comeback.</p></div>
+        <figure class="split-media"><img src="assets/images/credit-score-tracker/12.png" alt="Anyfin mascot" loading="lazy"></figure>
+  </div>
+  <div class="split">
+        <div class="split-text"><h3 class="split-h">Focus on details</h3><p>We played with this a bit more and added a diving animation and other sea-related metaphors to illustrate the idea of diving into the unknown (since not everybody knows what their credit score is, and it might be scary for some to find out 😅).</p></div>
+        <figure class="split-media"><img src="assets/images/credit-score-tracker/13.png" alt="Focus on details" loading="lazy"></figure>
+  </div>
+  <div class="split">
+        <div class="split-text"><h3 class="split-h">Easter egg</h3><p>We also added an easter egg when tapping on the dolphin (you can check it out in the prototype, just tap on it like 4 times), which involved developers working with animation and haptic effects. I think everybody loved this part the most.</p></div>
+        <figure class="split-media"><img src="assets/images/credit-score-tracker/14.png" alt="Easter egg" loading="lazy"></figure>
+  </div>
+  <div class="split">
+        <div class="split-text"><h3 class="split-h">Simplify</h3><p>But of course it's not just fun stuff. We also wanted people to understand their score and what they can do to improve it. So we worked a lot on the content to put this in the simplest way.</p></div>
+        <figure class="split-media"><img src="assets/images/credit-score-tracker/15.png" alt="Simplify" loading="lazy"></figure>
+  </div>
+  <h2>Design</h2>
+  <p>The final result turned out to be just as we wanted it to be. It wasn't perfect from the beginning, but it was doing exactly what we wanted it to do. And it was a super nice feeling.</p>
+  <div class="wraprow">
+          <figure class="wrap-item"><img src="assets/images/credit-score-tracker/16.png" alt="Highlighted entry point on the home screen" loading="lazy"><figcaption>Highlighted entry point on the home screen</figcaption></figure>
+          <figure class="wrap-item"><img src="assets/images/credit-score-tracker/17.png" alt="Credit score info" loading="lazy"><figcaption>Credit score info</figcaption></figure>
+          <figure class="wrap-item"><img src="assets/images/credit-score-tracker/18.png" alt="Our very proud easter egg" loading="lazy"><figcaption>Our very proud easter egg</figcaption></figure>
+          <figure class="wrap-item"><img src="assets/images/credit-score-tracker/19.png" alt="Credit score visualisation" loading="lazy"><figcaption>Credit score visualisation</figcaption></figure>
+          <figure class="wrap-item"><img src="assets/images/credit-score-tracker/20.png" alt="Key info about user&#x27;s score" loading="lazy"><figcaption>Key info about user&#x27;s score</figcaption></figure>
+          <figure class="wrap-item"><img src="assets/images/credit-score-tracker/21.png" alt="Some tips" loading="lazy"><figcaption>Some tips</figcaption></figure>
+  </div>
+  <h2>Outcome 🐬</h2>
+  <p>We designed, developed and shipped our playful Credit score product in just a few weeks. It backed Anyfin's vision and drew users' attention. It also reminded us of the importance of delight in the user experience, and that we should always have room for that.</p>
+  <p>And we had a lot of fun doing it all.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="anyfin-rethinking-refinance" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-anyfin-rethinking-refinance"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title">Re-thinking refinance product in <span class="accent-anyfin">Anyfin</span> app</h1>
+        <p class="case-subtitle">Improving the core financial product</p>
+        <p>This product has been in place from the very beginning of Anyfin, so it had a lot of changes through all these years. And, even though each of them made sense, together they resulted in a bit scattered experience. So our focus was to make it nice and simple again.</p>
+      </header>
+      <div class="case-gallery" style="background: #F7F6F4;">
+        <div class="g-row g-row-1">
+          <img class="g-single" src="assets/images/anyfin-rethinking-refinance/1.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>Some background</h2>
+  <p>The core product at Anyfin is loan refinancing. We help our customers lower their current interest rate, remove hidden costs, and generally make them feel in control of their loan situation.</p>
+  <p>And it is very important for active customers to know everything they should about their refinanced loans: from payments to extra benefits and features they can use to make it even simpler to deal with.</p>
+  <h2>Before redesign</h2>
+  <p>From the first glance there were no major issues. All features were in place, crucial functions were sort of prioritised. In other words, why should we even bother?</p>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/anyfin-rethinking-refinance/2.png" alt="" loading="lazy"></figure>
+  </div>
+  <p>But, if we take a closer look...</p>
+  <div class="imgrid c2">
+          <figure><img src="assets/images/anyfin-rethinking-refinance/3.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/anyfin-rethinking-refinance/4.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/anyfin-rethinking-refinance/5.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/anyfin-rethinking-refinance/6.png" alt="" loading="lazy"></figure>
+  </div>
+  <p>In other words, the product was complex (no clear focus or hierarchy), not flexible (every new feature or important notification ended up in a stack on top of everything), and not adjusted to the new brand guidelines.</p>
+  <h2>Redesign</h2>
+  <div class="compare">
+        <figure class="cmp-item"><img src="assets/images/anyfin-rethinking-refinance/7.png" alt="Before" loading="lazy"><figcaption>Before</figcaption></figure>
+        <svg class="cmp-arrow" width="80" height="16" viewBox="0 0 80 16" aria-hidden="true"><line x1="2" y1="8" x2="72" y2="8" stroke="#000" stroke-width="4"/><polyline points="64,2 74,8 64,14" fill="none" stroke="#000" stroke-width="4"/></svg>
+        <figure class="cmp-item"><img src="assets/images/anyfin-rethinking-refinance/8.png" alt="After" loading="lazy"><figcaption>After</figcaption></figure>
+  </div>
+  <p>Let's take a closer look at the new version.</p>
+  <div class="itcards">
+        <div class="itcard"><div class="it-img"><img src="assets/images/anyfin-rethinking-refinance/9.png" alt="" loading="lazy"></div><div class="it-text"><p>We removed confusing navigation to put debt in focus.</p><p>We also added an option to refinance another in connection with the total debt</p></div></div>
+        <div class="itcard"><div class="it-img"><img src="assets/images/anyfin-rethinking-refinance/10.png" alt="" loading="lazy"></div><div class="it-text"><p>We connected all extra features to the total debt, since they affect it directly.</p><p>It will also serve as a “home” for every new secondary feature in the future.</p></div></div>
+        <div class="itcard"><div class="it-img"><img src="assets/images/anyfin-rethinking-refinance/11.png" alt="" loading="lazy"></div><div class="it-text"><p>Everything one can do about their upcoming payment is now in one place.</p><p>And this section takes the full user’s attention.</p></div></div>
+        <div class="itcard"><div class="it-img"><img src="assets/images/anyfin-rethinking-refinance/12.png" alt="" loading="lazy"></div><div class="it-text"><p>Change a payment plan or turn on automatic payments are now always visible and more accessible</p></div></div>
+        <div class="itcard"><div class="it-img"><img src="assets/images/anyfin-rethinking-refinance/13.png" alt="" loading="lazy"></div><div class="it-text"><p>Pay button is now the most prominent in the payment section</p></div></div>
+        <div class="itcard"><div class="it-img"><img src="assets/images/anyfin-rethinking-refinance/14.png" alt="" loading="lazy"></div><div class="it-text"><p>Important notifications and alerts are now contextually connected to the related items</p></div></div>
+        <div class="itcard"><div class="it-img"><img src="assets/images/anyfin-rethinking-refinance/15.png" alt="" loading="lazy"></div><div class="it-text"><p>Upsells and marketing messages calmed down and don’t steal user’s attention</p></div></div>
+  </div>
+  <h2>Outcome 🏁</h2>
+  <ul><li>In a very short time we improved our core product for active customers</li><li>We made it ready for future improvements and experiments</li><li>We managed to keep all the functions, but made the overall experience smoother</li><li>Design improvements also led to old code reviews, which will make developers&#x27; work easier in the future</li></ul>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="endowment-life-insurance-v2" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-endowment-life-insurance-v2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title">Endowment life insurance for <span class="accent">Sberbank</span></h1>
+        <p class="case-subtitle">The second stage</p>
+        <p>We were the first on the Russian market to launch Endowment Life Insurance online, but it was just the beginning. We got the first customers, first reviews and (of course) some problems that need to be solved in order to make the product better.</p>
+      </header>
+      <div class="case-gallery" style="background: #B8CCC1;">
+        <div class="g-row">
+          <img class="g-side"   src="assets/images/endowment-life-insurance-v2/1.png" alt="" loading="lazy">
+          <img class="g-center" src="assets/images/endowment-life-insurance-v2/2.png" alt="" loading="lazy">
+          <img class="g-side"   src="assets/images/endowment-life-insurance-v2/3.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>What did we learn</h2>
+  <ul><li>Not all customers fully understand how the product works</li><li>The product is lacking an interest rate. Not everyone is interested in insurance, therefore this benefit is not enough to attract customers</li><li>The coverage of the insurance is not good enough</li><li>Customer service is too hidden in the app</li><li>Customers do not see important information about the product and insurance terms, which results in negative reviews</li></ul>
+  <h3 class="sub">What did the business offer</h3>
+  <ul><li>To make the product profitable for the client. This was not easy in terms of unit economics, but it was still possible.</li><li>To expand coverage, so that those who need insurance could consider our product more seriously</li></ul>
+  <h3 class="sub">What did we offer</h3>
+  <ul><li>Conduct research and check the occurred problems in order to better understand their cause</li><li>Redesign problem areas to improve user experience</li><li>Integrate new features into the product without damaging the UX</li></ul>
+  <h2>Research is essential</h2>
+  <p>Already at the MVP stage, we came up with a plan for future improvements. So, right after the first release we began to work on the second iteration. The main changes were adding an interest rate and covered cases. Shortly, prototypes were done, and user testing began.</p>
+  <h3 class="sub">The first thing we checked</h3>
+  <p>Our first focus was the potential problem of hidden customer support. We wanted to find out if customers really needed it, and, if so, where they expect to find it. We prepared 3 different options and ran a quick test with 100 users.</p>
+  <div class="wraprow">
+          <figure class="wrap-item" style="flex:0 0 180px;max-width:180px"><img src="assets/images/endowment-life-insurance-v2/4.png" alt="Customer support button in the navbar" loading="lazy"><figcaption>Customer support button in the navbar</figcaption></figure>
+          <figure class="wrap-item" style="flex:0 0 180px;max-width:180px"><img src="assets/images/endowment-life-insurance-v2/5.png" alt="Different icon, same placement" loading="lazy"><figcaption>Different icon, same placement</figcaption></figure>
+          <figure class="wrap-item" style="flex:0 0 180px;max-width:180px"><img src="assets/images/endowment-life-insurance-v2/6.png" alt="Customer support entry point in the footer" loading="lazy"><figcaption>Customer support entry point in the footer</figcaption></figure>
+  </div>
+  <div class="metrics">
+        <div class="metric"><div class="metric-title">79%</div><div class="metric-body">would like to be consulted about a product</div></div>
+        <div class="metric"><div class="metric-title">70%</div><div class="metric-body">would look for customer support in the footer</div></div>
+  </div>
+  <h3 class="sub extra">The second thing we checked</h3>
+  <p>The overall usability and intuitiveness of the second iteration was essential. Therefore we checked it by conducting a usability test with 5 respondents who didn't know anything about Endowment Life Insurance.</p>
+  <p>First of all, we tested hypotheses related to the understanding of the product:</p>
+  <ul><li>Respondents will be able to understand how the program works based on the info on the product card</li><li>Respondents will pay notice important information about the product and insurance policy</li></ul>
+  <div class="metrics">
+        <div class="metric"><div class="metric-title">4 of 5</div><div class="metric-body"><span class="pos">Could describe the product right</span> after checking the product card</div></div>
+        <div class="metric"><div class="metric-title">All respondents</div><div class="metric-body"><span class="pos">Found all the important information</span> about the product</div></div>
+        <div class="metric"><div class="metric-title">Only 11</div><div class="metric-body">Non-critical problems were found and <span class="pos">fixed</span></div></div>
+        <div class="metric"><div class="metric-title">All respondents</div><div class="metric-body">Passed the scenario and all tasks <span class="pos">without help</span></div></div>
+        <div class="metric"><div class="metric-title">35 of 41</div><div class="metric-body">Hypotheses were <span class="pos">confirmed</span> during the research</div></div>
+        <div class="metric"><div class="metric-title">Just 1</div><div class="metric-body">Respondent <span class="neg">did not understand the value</span> of the product</div></div>
+  </div>
+  <h3 class="sub extra">The third part of the research</h3>
+  <p>Last but not least we conducted a 400-people survey in which respondents were asked to answer a few questions and complete a small task in a prototype. The main goal was to check if the crucial scenarios were working as expected.</p>
+  <div class="metrics">
+        <div class="metric"><div class="metric-title">82%</div><div class="metric-body">Understood how the product works</div></div>
+        <div class="metric"><div class="metric-title">76%</div><div class="metric-body">Understood the insurance program</div></div>
+        <div class="metric"><div class="metric-title">80%</div><div class="metric-body">Correctly answered all the questions</div></div>
+  </div>
+  <p>The survey results showed that our new solution was good to go. The respondents understood the terms of the product on their own, found answers to all the necessary questions, and if they wanted to ask about something, they knew how to reach customer support.</p>
+  <h2>Difficulties</h2>
+  <p>When the designs were done and implementation was already going, an unexpected obstacle arose. The Central Bank of Russia included Endowment Life Insurance in the list of financial products that are recommended to be issued only to qualified investors. Obtaining this status could be quite difficult, and, due to significant limitations, not all of our potential clients would be able to get it.</p>
+  <p>Nevertheless, we found an opportunity to make our product available for any investor. We had to slightly change the business logic and expand the product description. At the same time, we made sure that none of those changes affected the UX. This allowed us to adapt to new constraints in the shortest possible time and not stop the development.</p>
+  <h2>Final result</h2>
+  <div class="masonry stroked">
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/7.png" alt="Product card" loading="lazy"><figcaption>Product card</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/8.png" alt="About the program" loading="lazy"><figcaption>About the program</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/9.png" alt="About the policy" loading="lazy"><figcaption>About the policy</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/10.png" alt="Different coverage" loading="lazy"><figcaption>Different coverage</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/11.png" alt="How does it work" loading="lazy"><figcaption>How does it work</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/12.png" alt="Calculator" loading="lazy"><figcaption>Calculator</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/13.png" alt="Customer support" loading="lazy"><figcaption>Customer support</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/14.png" alt="Essential terms" loading="lazy"><figcaption>Essential terms</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/15.png" alt="Confirmation" loading="lazy"><figcaption>Confirmation</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/16.png" alt="Personal details" loading="lazy"><figcaption>Personal details</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/17.png" alt="Payment method" loading="lazy"><figcaption>Payment method</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance-v2/18.png" alt="Success screen" loading="lazy"><figcaption>Success screen</figcaption></figure>
+  </div>
+  <h2>Next steps 📝</h2>
+  <p>Monitor all the product metrics and check:</p>
+  <ol><li>How people will react to the new product benefits</li><li>Changes in Customer support workload</li><li>New active Endowment life insurance dynamics</li><li>How well customers will understand the terms of the product</li></ol>
+  <p>In parallel, identify new opportunities for the product upgrades and see if any big shifts needed to be made to make it successful.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="endowment-life-insurance" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-endowment-life-insurance"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title">Endowment life insurance for <span class="accent">Sberbank</span></h1>
+        <p class="case-subtitle">How did we become the first to bring the product online</p>
+        <p>The COVID pandemic began in 2020. Naturally, launching all Sberbank's products online became the top priority. Our team's main focus was to become the first on the Russian market to bring Endowment Life Insurance online.</p>
+      </header>
+      <div class="case-gallery" style="background: #DBE7DE;">
+        <div class="g-row">
+          <img class="g-side"   src="assets/images/endowment-life-insurance/1.png" alt="" loading="lazy">
+          <img class="g-center" src="assets/images/endowment-life-insurance/2.png" alt="" loading="lazy">
+          <img class="g-side"   src="assets/images/endowment-life-insurance/3.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>What is endowment life insurance?</h2>
+  <p>It is an insurance product that's often dressed up as a “College savings plan”. In other words, it's a sort of combo of life insurance and savings program.</p>
+  <h2>Key issues</h2>
+  <ul><li>The product is complicated. One needs financial knowledge to understand it</li><li>The product is strictly regulated</li><li>None of the required processes were adapted for a digital environment</li><li>No other company had done it yet</li><li>Competitors were clearly working on a similar product</li></ul>
+  <h2>UX research</h2>
+  <div class="textimg">
+        <div class="ti-text"><p>I joined the team when the first prototype had already been made. So, the first thing I did was usability testing to find out if there were any UX issues.</p><p>8 in-depth interviews were conducted, 1.5–2 hours each. Half of the respondents had experience in investing and knew about endowment life insurance, the other half had never invested or heard about the product.</p><p>Most of the issues were related to the copy. Respondents did not fully understand the product and its most important features. Other issues were quite small and required minor design changes. The most important thing was that we realised we were going in the right direction. So we moved on to the second iteration.</p></div>
+        <figure class="ti-media" style="flex:0 1 468px;min-width:320px;max-width:468px"><img src="assets/images/endowment-life-insurance/4.png" alt="" loading="lazy"></figure>
+  </div>
+  <h2>Design 🤝 Development</h2>
+  <p>We needed to launch the product asap, so we worked very closely with developers. They started working on the implementation right after the first UX research was completed, and by the time we updated designs, the base for the future product had already been done. So the only thing left was minor UI and copy changes. This helped us speed up the process immensely.</p>
+  <p>Another thing we managed to accomplish during this project was a global design system upgrade. Using only the components we had at that point wasn't enough to deliver the best user experience, so we agreed to make some global changes that could be used by other teams in the future.</p>
+  <h2>Language!</h2>
+  <div class="textimg">
+        <div class="ti-text"><p>UX research showed us that the copy wasn't perfect in the beginning. Users misread some crucial terms and couldn't fully understand the product. So, together with UX writers, we iterated on every line a bunch of times. The key focus was to sound like a human and make all crucial details transparent and understandable.</p><p>Finally, the texts were written, and designs successfully passed the second usability test. The time had come for final approvals. Which, amongst other things, means the Legal team and their sign-off.</p><p>Since this product had never been launched online before, they wanted to minimise every possible risk. So they literally commented on every word we had written.</p><p>Blocking a friendly tone of voice and adding “ugly text” everywhere is quite common for big banks. And it is completely understandable, but in the end it makes it hard for people to use the product. So, naturally, we wanted to meet each other halfway and keep the end result as nice as possible. And, 4 iterations later, we made it.</p></div>
+        <figure class="ti-media" style="flex:0 1 508px;min-width:320px;max-width:508px"><img src="assets/images/endowment-life-insurance/5.png" alt="Legal comments on each design iteration" loading="lazy"><figcaption>Legal comments on each design iteration</figcaption></figure>
+  </div>
+  <h2>Final result</h2>
+  <div class="masonry stroked">
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/6.png" alt="Product card" loading="lazy"><figcaption>Product card</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/7.png" alt="About the program" loading="lazy"><figcaption>About the program</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/8.png" alt="Calculator" loading="lazy"><figcaption>Calculator</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/9.png" alt="Terms" loading="lazy"><figcaption>Terms</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/10.png" alt="Personal info" loading="lazy"><figcaption>Personal info</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/11.png" alt="Payment method" loading="lazy"><figcaption>Payment method</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/12.png" alt="Confirmation" loading="lazy"><figcaption>Confirmation</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/endowment-life-insurance/13.png" alt="Success screen" loading="lazy"><figcaption>Success screen</figcaption></figure>
+  </div>
+  <h2>Outcome 💫</h2>
+  <p>We were the first on the Russian market to bring the full process of purchasing endowment life insurance online, and it only took us 4 months.</p>
+  <p>Next step – evaluating results, identifying occurring problems and moving on to the second iteration.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="21pub" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-21pub"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title">21 Pub</h1>
+        <p class="case-subtitle">Concept of a service that serves as the bridge between online and offline for HoReCa</p>
+      </header>
+      <div class="case-gallery" style="background: #3A3937;">
+        <div class="g-row">
+          <img class="g-side"   src="assets/images/21pub/1.png" alt="" loading="lazy">
+          <img class="g-center" src="assets/images/21pub/2.png" alt="" loading="lazy">
+          <img class="g-side"   src="assets/images/21pub/3.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>We all have been in this situation</h2>
+  <div class="iconlist">
+        <div class="ic-row"><img class="ic-img" src="assets/images/21pub/b1.png" alt=""><div class="ic-text">It&#x27;s Friday night, you and a bunch of friends want to go out</div></div>
+        <div class="ic-row"><img class="ic-img" src="assets/images/21pub/b2.png" alt=""><div class="ic-text">Question: where should you go?</div></div>
+        <div class="ic-row"><img class="ic-img" src="assets/images/21pub/b3.png" alt=""><div class="ic-text">You open up Google / Google Maps / TripAdvisor</div></div>
+        <div class="ic-row"><img class="ic-img" src="assets/images/21pub/b4.png" alt=""><div class="ic-text">Scroll through dozens of options, pick one</div></div>
+        <div class="ic-row"><img class="ic-img" src="assets/images/21pub/b5.png" alt=""><div class="ic-text">The one you picked is not what you wanted</div></div>
+  </div>
+  <p>Choosing a place is a lottery. Finding a new place to go takes a lot of time. Existing tools do not give enough information to make the right decision. Making a wrong decision is easy (bad audience, bad time etc). All these problems became the basis for the idea of creating a smart recommendation system which will help people make the right choice.</p>
+  <h2>How it started</h2>
+  <p>My wife and I were on vacation in London and certainly couldn't miss the traditional British pubs. The problem was there were way too many of them, so it was very hard to choose one. Ratings and maps didn't help much – they can never guarantee the “perfect match” and it takes a lot of time to go over them. Luckily enough, we had a bunch of friends there, so we followed their recommendations. But I wish we had a simple way of finding something that would meet our expectations.</p>
+  <p>After our trip I kept thinking about it and got an idea. A concept of a service which offers you a comfortable route between several pubs for the evening.</p>
+  <div class="imgflow" style="grid-template-columns: repeat(auto-fill, minmax(135px, 216px))">
+        <figure><img src="assets/images/21pub/4.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/5.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/6.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/7.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/8.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/9.png" alt="" loading="lazy"></figure>
+  </div>
+  <p class="list-lead">The concept had its advantages:</p>
+  <ul><li>It solves the problem of finding a place for the evening</li><li>New places every time one&#x27;s using the service</li><li>Gamified experience</li><li>Room for monetisation – native ads, special routes, challenges, etc.</li></ul>
+  <p class="list-lead">And some problems:</p>
+  <ul><li>The audience is limited because the main focus was on pubs</li><li>It didn&#x27;t fully solve “Finding a place for the evening” problem. It didn&#x27;t give user different options, so the whole thing was fully related on trust.</li></ul>
+  <h2>Research</h2>
+  <p>I conducted 6 interviews to see if the main idea is interesting for potential users.</p>
+  <div class="imgflow" style="grid-template-columns: repeat(auto-fill, minmax(320px, 362px))">
+        <figure><img src="assets/images/21pub/10.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/11.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/12.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/13.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/14.png" alt="" loading="lazy"></figure>
+        <figure><img src="assets/images/21pub/15.png" alt="" loading="lazy"></figure>
+  </div>
+  <p class="list-lead">The most important things I learned:</p>
+  <ul><li>Respondents found the concept fun and interesting, but were not sure if they would use the service often</li><li>Most respondents face the problem of finding new bars and restaurants</li></ul>
+  <h2>Digging deeper</h2>
+  <p>After studying the case of searching for a bar, restaurant or any other place online, I realised that results often lack a personal approach, which makes it hard to make a choice. All existing solutions simply show a list of the nearest places, which is not very easy to use. Plus there is no guarantee that you will like the chosen place.</p>
+  <p>I assumed that this problem could be solved by making it easier to interact with the search results and recommending places based on user preferences.</p>
+  <p class="list-lead">I decided to dig deeper into this idea and conducted in-depth interviews with 15 respondents from 3 different groups:</p>
+  <ol><li>Students who are single or in a relationship</li><li>25 to 34 years old, working, in a relationship or with a family, with average or above average income</li><li>34–45 years old with family and above average income</li></ol>
+  <div class="metrics">
+        <div class="metric"><div class="metric-title">80%</div><div class="metric-body">Respondents in each group often faced the problem of finding a place</div></div>
+        <div class="metric"><div class="metric-title">14 of 15</div><div class="metric-body">Use mobile apps to find new places to go to</div></div>
+        <div class="metric"><div class="metric-title">11 of 15</div><div class="metric-body">Are often looking for new places in their city to spend a weekend</div></div>
+        <div class="metric"><div class="metric-title">13 of 15</div><div class="metric-body">Named personal taste as the key factor when choosing a place</div></div>
+        <div class="metric"><div class="metric-title">12 of 15</div><div class="metric-body">Would regularly use the service to find places in an easy way</div></div>
+        <div class="metric"><div class="metric-title">All</div><div class="metric-body">Liked the recommendations based on personal preferences</div></div>
+  </div>
+  <p>The research showed that users like the idea of smart personal recommendations. They mentioned some benefits:</p>
+  <ol><li>It adjusts to a specific person</li><li>It can be used anywhere in the world (especially helpful for those who travel frequently)</li><li>It can provide helpful tips at the right time – lunch spots at lunchtime, bars or restaurants in the evening, unusual places on weekends, etc.</li></ol>
+  <h2>Design</h2>
+  <p>Before designing, I once again analysed the results of the research to highlight all important scenarios that should be considered in the future solution.</p>
+  <figure class="figure">
+    <img class="shot" src="assets/images/21pub/16.png" alt="Fragment of the analysis of all user scenarios" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="ph" style="display:none">Add image</div>
+    <figcaption>Fragment of the analysis of all user scenarios</figcaption>
+  </figure>
+  <p>From the scenarios, I identified “Attention focuses” – the main points for the user in each specific scenario.</p>
+  <figure class="figure">
+    <img class="shot" src="assets/images/21pub/17.png" alt="Example of Attention focuses" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="ph" style="display:none">Add image</div>
+    <figcaption>Example of Attention focuses</figcaption>
+  </figure>
+  <figure class="figure">
+    <img class="shot" src="assets/images/21pub/18.png" alt="A Focus map that shows how Attention focuses are connected" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="ph" style="display:none">Add image</div>
+    <figcaption>A Focus map that shows how Attention focuses are connected</figcaption>
+  </figure>
+  <p>These 2 documents are very important for checking design solutions before usability tests. And, after analysis and several iterations, the designs were ready.</p>
+  <div class="masonry">
+        <figure class="m-item"><img src="assets/images/21pub/19.png" alt="Login" loading="lazy"><figcaption>Login</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/21pub/20.png" alt="Preferences" loading="lazy"><figcaption>Preferences</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/21pub/21.png" alt="Home" loading="lazy"><figcaption>Home</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/21pub/22.png" alt="Recommendations" loading="lazy"><figcaption>Recommendations</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/21pub/23.png" alt="Search" loading="lazy"><figcaption>Search</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/21pub/24.png" alt="Place card" loading="lazy"><figcaption>Place card</figcaption></figure>
+        <figure class="m-item"><img src="assets/images/21pub/25.png" alt="Inspiration tab" loading="lazy"><figcaption>Inspiration tab</figcaption></figure>
+  </div>
+  <p>To check the final designs I conducted a usability test with the respondents I spoke to before.</p>
+  <div class="metrics">
+        <div class="metric"><div class="metric-title">All respondents</div><div class="metric-body">Completed all tasks and found a place without help</div></div>
+        <div class="metric"><div class="metric-title">13 of 15</div><div class="metric-body">Would recommend the service to their friends</div></div>
+        <div class="metric"><div class="metric-title">14 of 15</div><div class="metric-body">Found the solution intuitive, nice and said they would use it</div></div>
+  </div>
+  <h2>Outcome 🎈</h2>
+  <p>In a very short time, I managed to test the idea and design a solution to a very simple and frequent problem – finding a place to go out.</p>
+  <p>The next step is to find the right path for the business part of the concept. I believe that this service can be potentially interesting for pubs and restaurants, because it will engage a relevant audience and will open a new and more convenient way of marketing for them.</p>
+      </div>
+    </div>
+  </section>
+  <section class="view case-view" id="ux-research" hidden>
+    <div class="wrap case">
+      <a class="back-btn" href="#card-ux-research"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg><span>back to cases</span></a>
+      <header class="case-head">
+        <h1 class="case-title">UX research for a sales department</h1>
+        <p class="case-subtitle">For the largest classified advertisements website</p>
+        <p>A client, one of the largest online marketplaces on the market, requested a big UX research for its sales department. Their main goals were to find bottlenecks and pain points in sales managers' daily work, and to come up with design solutions that could increase the productivity of the sales team.</p>
+        <p>As in every other company, the main tool for sales people was a CRM. So we agreed to focus mostly on digging deeper into it.</p>
+      </header>
+      <div class="case-gallery" style="background: #DDDEE8;">
+        <div class="g-row g-row-1">
+          <img class="g-single" src="assets/images/ux-research/1.png" alt="" loading="lazy">
+        </div>
+      </div>
+      <div class="content">
+  <h2>How it began</h2>
+  <p>We planned 40 in-depth interviews with managers of different grades to assess the overall situation and identify as many potential problems as possible.</p>
+  <p class="list-lead">Each interview consisted of two parts:</p>
+  <ul><li>Talking – researcher and designer asked sales managers about their daily work</li><li>Observation – we watched what and how did employee do during their working hours, what life hacks did they use in their work, how did they act on assigned tasks</li></ul>
+  <p class="list-lead">We felt it was a good approach for 2 reasons:</p>
+  <ul><li>The talking part helped us to understand how does the employee evaluate their work, what worries them, what processes seem to be difficult</li><li>The observation part allowed us to see the real work process. How many tasks do can they complete using their main tool, in what cases does it lack some functions, and what do they spend the most of their time on</li></ul>
+  <p>To speed up the research results and prepare potential solutions quicker, we divided the respondents into 4 groups, 10 people each.</p>
+  <p class="list-lead">The first results showed:</p>
+  <ul><li>CRM was overloaded and not intuitive enough. It could take an hour to solve one simple question</li><li>Many respondents were using offline tools - stickers, notes, etc., and then adding all the info to the CRM. This slowed down their work, and also made it difficult to share info with colleagues</li><li>There were many small logical errors in the CRM, which in the end resulted in a lot of wasted time and energy</li></ul>
+  <h2>First results presentation. Conflict.</h2>
+  <div class="textimg">
+        <div class="ti-text">  <p class="list-lead">After the first results were presented, a conflict broke out. In short, our client wasn&#x27;t happy with:</p>
+  <ul><li>Our speed</li><li>The format of the result. We chose to go with “problem cards”, which contained the context of the problem, it&#x27;s criticality, where and when does it occur, and potential solutions. Unfortunately, we were expected to give more information.</li></ul>
+  <p>Our client said that they discussed these points with our manager several times, and our manager said they didn't. Me and my co-workers didn't see any warning signs before the meeting, because we initially agreed that the manager would be the only contact point with the client from our side.</p>
+  <p class="list-lead">The situation didn&#x27;t look good, no one wanted to step back. So I tried to help and suggested:</p>
+  <ul><li>To involve the team in the communication with the client. It felt like this problem could be easily avoided if we had clear expectations from the beginning.</li><li>Adjust the research plan. Speed up the process and deliver results every week to meet the deadline.</li><li>Agree on what the final result should be and stick to it.</li></ul>
+  <p>All sides agreed, and we managed to resolve the situation.</p></div>
+        <figure class="ti-media" style="flex:0 1 504px;min-width:320px;max-width:504px"><img src="assets/images/ux-research/2.png" alt="The first versions didn&#x27;t work for the client" loading="lazy"><figcaption>The first versions didn&#x27;t work for the client</figcaption></figure>
+  </div>
+  <h2>The second breath</h2>
+  <p>After quite long negotiations, we needed to speed things up. To do it properly and to make sure we're all on the same page, we agreed on a new plan.</p>
+  <div class="imgrid c1">
+          <figure><img src="assets/images/ux-research/3.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/ux-research/4.png" alt="" loading="lazy"></figure>
+          <figure><img src="assets/images/ux-research/5.png" alt="" loading="lazy"></figure>
+  </div>
+  <p class="list-lead">We also agreed on a format for the final results:</p>
+  <ul><li>Keep the “Problem cards”. This format suited both business and development.</li><li>Create a Customer Journey Map to be able to dive deeper into the context of each problem and make it easier to share results across the company.</li></ul>
+  <figure class="figure">
+    <img class="shot" src="assets/images/ux-research/6.png" alt="Problem card example" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="ph" style="display:none">Add image</div>
+    <figcaption>Problem card example</figcaption>
+  </figure>
+  <figure class="figure">
+    <img class="shot" src="assets/images/ux-research/7.png" alt="Part of CRM" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="ph" style="display:none">Add image</div>
+    <figcaption>Part of CRM</figcaption>
+  </figure>
+  <p>In three weeks we completed the survey on the remaining 30 respondents.</p>
+  <h2>Outcome ✨</h2>
+  <ul><li>During the research, we identified more than 150 problems: UX-, business process- and employee training-related</li><li>80% of the UX problems were already solved before the project finished due to early hand-off to the dev team. Remaining 20% were put in the next quarter backlog.</li><li>Employee training has been adjusted, all changes were based on our findings and recommendations</li><li>An action plan for business process problems has been developed together with key stakeholders</li></ul>
+      </div>
+    </div>
+  </section>
+  <section class="view" id="contact" hidden>
+    <div class="contact-block">
+    <section class="section">
+      <h1>Let's talk</h1>
+      <h2>Don't be a stranger, feel free to <a href="mailto:isrozhin@gmail.com">email</a> or <a href="https://www.linkedin.com/in/isrozhin" target="_blank" rel="noopener">LinkedIn</a> me.</h2>
+      <h2>Let's talk product, product design, UX, UI, research, opportunities…you name it.</h2>
+      <h2>// in case you need to copy email: isrozhin@gmail.com 🤝</h2>
+    </section>
+    <section class="section">
+      <h1>Me in a nutshell</h1>
+      <h2>I'm Ivan, Product designer with 7+ years of experience. Check out <a href="https://drive.google.com/file/d/1J3oK0p5imbneMSC-rO0yPpkEPMTDWj3o/view?usp=sharing" target="_blank" rel="noopener">my CV</a> to see the latest experience.</h2>
+      <h2>Over the years I have worked in various areas: e-commerce, medicine, telecom, education, fintech, etc. In my work I always rely on both qualitative and quantitative research data, while keeping an eye open on the product metrics and user insights.</h2>
+      <h2>I always act as a user's advocate, and always try to find a perfect user-business balance in my solutions.</h2>
+      <h2>I truly believe in a team work, because the best results could only be reached in collaboration.</h2>
+      <h2>Last but not least, I remain curious and keep an open mind for new learnings, experiments and different approaches to design.</h2>
+    </section>
+  </div>
+  </section>
+  </main>
+  <footer class="site-footer">
+    <a href="mailto:isrozhin@gmail.com">isrozhin@gmail.com</a>
+    <a href="https://www.linkedin.com/in/isrozhin" target="_blank" rel="noopener">LinkedIn</a>
+  </footer>
+  <script>
+    // Simple hash router: show the section whose id matches location.hash.
+    function showView() {
+      var raw = (location.hash || '#home').slice(1) || 'home';
+      var card = null;                       // "#card-<slug>" -> home, scrolled to that card
+      if (raw.indexOf('card-') === 0) { card = raw; raw = 'home'; }
+      var match = document.getElementById(raw);
+      if (!match || !match.classList.contains('view')) match = document.getElementById('home');
+      document.querySelectorAll('.view').forEach(function (v) { v.hidden = (v !== match); });
+      match.classList.remove('fade'); void match.offsetWidth; match.classList.add('fade');
+      if (card) {
+        var el = document.getElementById(card);
+        if (el) { el.scrollIntoView({ block: 'center' }); return; }
+      }
+      window.scrollTo(0, 0);
+    }
+    window.addEventListener('hashchange', showView);
+    document.addEventListener('DOMContentLoaded', showView);
+  </script>
+</body>
+</html>
