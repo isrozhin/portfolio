@@ -411,36 +411,6 @@ figcaption { color: var(--muted); font-size: 15px; margin-top: 14px; }
 .fade { animation: viewfade .28s ease; }
 @keyframes viewfade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 
-/* --- first-load banner (home only): dissolves in while pushing the cards down; the
-   cards return to their original place once it's dismissed. --- */
-.banner-wrap {
-  display: grid; grid-template-rows: 0fr;
-  transition: grid-template-rows .5s ease;
-}
-.banner-wrap.show { grid-template-rows: 1fr; }
-.banner-clip { overflow: hidden; min-height: 0; }
-.banner-card {
-  max-width: 752px; margin: 64px auto 0;   /* 752 = two cards + 112 gap; centred like the grid */
-  opacity: 0; transition: opacity .5s ease;
-  display: flex; align-items: center;
-  padding: 16px 32px 16px 16px;
-  background: #F0F5F7; border-radius: 8px;
-}
-.banner-wrap.show .banner-card { opacity: 1; }
-.banner-img { flex: none; width: 96px; height: 96px; border-radius: 8px; display: block; object-fit: cover; }
-.banner-text { flex: 1 1 auto; min-width: 0; margin-left: 24px; }
-.banner-title { font-size: 20px; font-weight: 700; color: #000; line-height: 1.3; }
-.banner-body { font-size: 20px; font-weight: 400; color: #000; line-height: 1.3; margin-top: 4px; }
-.banner-btn {
-  flex: none; margin-left: 32px; cursor: pointer;
-  font-family: inherit; font-size: 20px; font-weight: 600; color: #000;
-  background: #fff; border: 0; border-radius: 8px; padding: 14px 28px;
-}
-@media (max-width: 809px) {
-  .banner-card { flex-direction: column; align-items: flex-start; margin-top: 32px; max-width: 320px; }
-  .banner-text { margin-left: 0; margin-top: 24px; }
-  .banner-btn { margin-left: 0; margin-top: 32px; }
-}
 
   </style>
 </head>
@@ -454,18 +424,6 @@ figcaption { color: var(--muted); font-size: 15px; margin-top: 14px; }
   <main>
   <section class="view" id="home">
     <div class="wrap">
-      <div class="banner-wrap" id="banner">
-        <div class="banner-clip">
-          <div class="banner-card">
-            <img class="banner-img" src="assets/images/banner.png" alt="">
-            <div class="banner-text">
-              <div class="banner-title">All cases are human-written</div>
-              <div class="banner-body">AI is useful in lots of ways, but I believe stories are best told by humans.</div>
-            </div>
-            <button class="banner-btn" id="banner-close" type="button">Alright</button>
-          </div>
-        </div>
-      </div>
     <section class="projects">
     <a class="card" href="#mimo-balance-sheet-reconciliation" id="card-mimo-balance-sheet-reconciliation">
       <div class="thumb">
@@ -1376,19 +1334,6 @@ figcaption { color: var(--muted); font-size: 15px; margin-top: 14px; }
     }
     window.addEventListener('hashchange', showView);
     document.addEventListener('DOMContentLoaded', showView);
-
-    // First-load banner: reveal 100ms after load; hide on dismiss (in-memory only,
-    // so it returns on a real refresh but not while navigating between views).
-    document.addEventListener('DOMContentLoaded', function () {
-      var banner = document.getElementById('banner');
-      var close = document.getElementById('banner-close');
-      if (!banner || !close) return;
-      setTimeout(function () {
-        if ((location.hash || '#home') === '#home') window.scrollTo(0, 0);
-        banner.classList.add('show');
-      }, 300);
-      close.addEventListener('click', function () { banner.classList.remove('show'); });
-    });
   </script>
 </body>
 </html>
